@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  book:
+    build: ./book-service
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_HOST=host.docker.internal
+    
+  reservation:
+    build: ./reservation-service
+    ports:
+      - "8082:8082"
+    environment:
+      - DB_HOST=host.docker.internal
+      - BOOK_SERVICE_HOST=book:8081
+
+  user:
+    build: ./user-service
+    ports:
+      - "8083:8083"
+    environment:
+      - DB_HOST=host.docker.internal    
